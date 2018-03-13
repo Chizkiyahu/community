@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program {
@@ -38,7 +37,7 @@ public class Program {
                     doLoanApplicationAction(in, community);
                     break;
                 case 4:
-                    String list = community.VolunteerHoursReport();
+                    String list = community.getVolunteerHoursReport();
                     System.out.print("the list is \n");
                     System.out.print(list);
                     break;

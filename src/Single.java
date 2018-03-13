@@ -1,31 +1,27 @@
-import java.util.Date;
-
 public class Single extends CommunityMember {
 
-
-
-    private int yearInScool;
+    protected int yearsInSchool;
 
     public Single(int id, Gender gender, String name, String address, String birthday, int leranToraHoursPerWeek, int workHoursPerWeek, float salary, float exploitationOfRights, ContributionType contribut) throws Exception {
         super(id, gender, name, address, birthday, leranToraHoursPerWeek, workHoursPerWeek, salary, exploitationOfRights, contribut);
     }
 
 
-    public int getYearInScool() {
-        return yearInScool;
+    public int getYearsInSchool() {
+        return yearsInSchool;
     }
 
-    public void setYearInScool(int yearInScool) {
-        this.yearInScool = yearInScool;
+    public void setYearsInSchool(int yearsInSchool) {
+        this.yearsInSchool = yearsInSchool;
     }
 
 
     @Override
     public int taxValue() {
-        if(OK_USED_HOUERS_WEEK == this.getLeranToraHoursPerWeek())
+        if(HOURS_ALLOWED_PER_WEEK == this.getHourAWeekSpentLearning())
             return 0;
         else
-            return Math.max( 1000 + getWorkHoursPerWeek() * 10 , 0) ;
+            return Math.max( 1000 + getHoursAWeekSpentWorking() * 10 , 0) ;
     }
 
     @Override

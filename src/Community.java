@@ -36,7 +36,7 @@ public class Community {
     }
 
 
-    public String VolunteerHoursReport(){
+    public String getVolunteerHoursReport(){
         String sp = "SPIRITUALLY \n";
         String ph = "\nPHYSICALLY \n";
         String mu = "\nMUSICAL \n";
@@ -48,12 +48,11 @@ public class Community {
             temp += member.getName();
             temp += "   ";
             temp += member.recommendHoursVolunteer();
-            if (member.getContribut().equals(CommunityMember.ContributionType.SPIRITUALLY)) {
-                sp += temp;
-            } else if (member.getContribut().equals(CommunityMember.ContributionType.PHYSICALLY)) {
-                ph += temp;
-            } else if (member.getContribut().equals(CommunityMember.ContributionType.MUSICAL)) {
-                mu += temp;
+
+            switch (member.getContributionType()) {
+                case     MUSICAL: mu += temp;
+                case  PHYSICALLY: ph += temp;
+                case SPIRITUALLY: sp += temp;
             }
         }
         return sp + ph + mu + "\n\n";

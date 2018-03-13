@@ -1,29 +1,40 @@
-import java.util.Date;
-
 public abstract class CommunityMember implements DutiesAndRights{
 
-    protected final int HOUERS_WEEK = 24 *7;
-    protected final float OK_PERSNET_USED = (float) (2.0 / 3.0);
-    protected final  float OK_USED_HOUERS_WEEK = HOUERS_WEEK * OK_PERSNET_USED;
+    protected final int HOURS_IN_A_WEEK = 24 *7;
+    protected final float PERCENT_OF_WEEK_ALLOWED = (float) (2.0 / 3.0);
+    protected final  float HOURS_ALLOWED_PER_WEEK = HOURS_IN_A_WEEK * PERCENT_OF_WEEK_ALLOWED;
 
-    public CommunityMember(int id, Gender gender, String name, String address, String birthday,int leranToraHoursPerWeek,
-                           int workHoursPerWeek, float salary, float exploitationOfRights, ContributionType contribut) throws Exception{
-        this.id = id;
-        this.gender = gender;
-        this.name = name;
-        this.address = address;
-        this.birthday = birthday;
-        if (workHoursPerWeek +  leranToraHoursPerWeek == OK_USED_HOUERS_WEEK){
-            this.workHoursPerWeek = workHoursPerWeek;
-            this.leranToraHoursPerWeek = leranToraHoursPerWeek;
-        }
-        else throw new Exception("the tora and work isn't 2/3 from week");
-        this.salary = salary;
-        this.exploitationOfRights = exploitationOfRights;
-        this.contribut = contribut;
+    public enum Gender {
+        MALE, FEMALE
     }
 
-    private int id;
+    public enum ContributionType {
+        SPIRITUALLY, PHYSICALLY, MUSICAL
+    }
+
+    protected int id;
+    protected Gender gender;
+    protected String name;
+    protected String address;
+    protected int hourAWeekSpentLearning;
+    protected int hoursAWeekSpentWorking;
+    protected float exploitationOfRights;
+    protected float salary;
+    protected String birthday ;
+    protected ContributionType contributionType;
+
+    public CommunityMember(int id, Gender gender, String name, String address, String birthday,int hourAWeekSpentLearning,
+                           int workHoursPerWeek, float salary, float exploitationOfRights, ContributionType contributionType) throws Exception{
+        setId(id);
+        setGender(gender);
+        setName(name);
+        setAddress(address);
+        setBirthday(birthday);
+        setWorkPlusTorahHoursPerWeek(workHoursPerWeek, hourAWeekSpentLearning);
+        setSalary(salary);
+        setExploitationOfRights(exploitationOfRights);
+        setContributionType(contributionType);
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -33,13 +44,6 @@ public abstract class CommunityMember implements DutiesAndRights{
         return id;
     }
 
-    public enum Gender {
-        MALE, FEMALE
-
-    }
-
-    private Gender gender;
-
     public void setGender(Gender gender) {
         this.gender = gender;
     }
@@ -47,8 +51,6 @@ public abstract class CommunityMember implements DutiesAndRights{
     public Gender getGender() {
         return gender;
     }
-
-    private  String name ;
 
     public String getName() {
         return name;
@@ -58,8 +60,6 @@ public abstract class CommunityMember implements DutiesAndRights{
         this.name = name;
     }
 
-    private String address;
-
     public String getAddress() {
         return address;
     }
@@ -67,8 +67,6 @@ public abstract class CommunityMember implements DutiesAndRights{
     public void setAddress(String address) {
         this.address = address;
     }
-
-    private String birthday ;
 
     public String getBirthday() {
         return birthday;
@@ -78,27 +76,29 @@ public abstract class CommunityMember implements DutiesAndRights{
         this.birthday = birthday;
     }
 
-    private int leranToraHoursPerWeek;
-
-    public int getLeranToraHoursPerWeek() {
-        return leranToraHoursPerWeek;
+    public int getHourAWeekSpentLearning() {
+        return hourAWeekSpentLearning;
     }
 
-    private int workHoursPerWeek;
-
-    public int getWorkHoursPerWeek() {
-        return workHoursPerWeek;
+    public int getHoursAWeekSpentWorking() {
+        return hoursAWeekSpentWorking;
     }
 
-    public void setWorkPlusToraHoursPerWeek(int workHoursPerWeek, int leranHoursToraPerWeek) throws Exception{
-        if (workHoursPerWeek +  leranHoursToraPerWeek == OK_USED_HOUERS_WEEK){
-            this.workHoursPerWeek = workHoursPerWeek;
-            this.leranToraHoursPerWeek = leranHoursToraPerWeek;
+    public void setHourAWeekSpentLearning(int hourAWeekSpentLearning) throws Exception {
+        setWorkPlusTorahHoursPerWeek(hoursAWeekSpentWorking, hourAWeekSpentLearning);
+    }
+
+    public void setHoursAWeekSpentWorking(int hoursAWeekSpentWorking) throws Exception {
+        setWorkPlusTorahHoursPerWeek(hoursAWeekSpentWorking, hourAWeekSpentLearning);
+    }
+
+    public void setWorkPlusTorahHoursPerWeek(int workHoursPerWeek, int learnHoursTorahPerWeek) throws Exception{
+        if (workHoursPerWeek +  learnHoursTorahPerWeek == HOURS_ALLOWED_PER_WEEK){
+            this.hoursAWeekSpentWorking = workHoursPerWeek;
+            this.hourAWeekSpentLearning = learnHoursTorahPerWeek;
         }
-        else throw new Exception("the tora and work isn't 2/3 from week");
+        else throw new Exception("the torah and work isn't 2/3 from week");
     }
-
-    private float salary;
 
     public float getSalary() {
         return salary;
@@ -108,27 +108,15 @@ public abstract class CommunityMember implements DutiesAndRights{
         this.salary = salary;
     }
 
-    private float exploitationOfRights;
-
-    public float getExploitationOfRights() {
-        return exploitationOfRights;
-    }
-
     public void setExploitationOfRights(float exploitationOfRights) {
         this.exploitationOfRights = exploitationOfRights;
     }
 
-    public enum ContributionType {
-        SPIRITUALLY, PHYSICALLY, MUSICAL
+    public ContributionType getContributionType() {
+        return contributionType;
     }
 
-    private ContributionType contribut;
-
-    public ContributionType getContribut() {
-        return contribut;
-    }
-
-    public void setContribut(ContributionType contribut) {
-        this.contribut = contribut;
+    public void setContributionType(ContributionType contributionType) {
+        this.contributionType = contributionType;
     }
 }

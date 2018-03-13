@@ -1,20 +1,17 @@
-import java.util.Date;
-
 public class Married extends CommunityMember {
 
-
-
+    protected int spouseId;
+    protected int numberOfChildrenUnderEighteen;
 
     public Married(int id, Gender gender, String name, String address, String birthday, int leranToraHoursPerWeek,
                    int workHoursPerWeek, float salary, float exploitationOfRights, ContributionType contribut,
                    int spouseId, int numChildUnder18) throws Exception {
         super(id, gender, name, address, birthday, leranToraHoursPerWeek, workHoursPerWeek, salary, exploitationOfRights, contribut);
 
-        this.spouseId = spouseId;
-        this.numChildUnder18 = numChildUnder18;
+        setSpouseId(spouseId);
+        setNumberOfChildrenUnderEighteen(numChildUnder18);
     }
 
-    private int spouseId;
 
     public int getSpouseId() {
         return spouseId;
@@ -24,34 +21,30 @@ public class Married extends CommunityMember {
         this.spouseId = spouseId;
     }
 
-    private int numChildUnder18;
-
-    public int getNumChildUnder18() {
-        return numChildUnder18;
+    public int getNumberOfChildrenUnderEighteen() {
+        return numberOfChildrenUnderEighteen;
     }
 
-    public void setNumChildUnder18(int numChildUnder18) {
-        this.numChildUnder18 = numChildUnder18;
+    public void setNumberOfChildrenUnderEighteen(int numberOfChildrenUnderEighteen) {
+        this.numberOfChildrenUnderEighteen = numberOfChildrenUnderEighteen;
     }
-
 
     @Override
     public int taxValue() {
-        if(OK_USED_HOUERS_WEEK == this.getLeranToraHoursPerWeek())
+        if(HOURS_ALLOWED_PER_WEEK == this.getHourAWeekSpentLearning())
             return 0;
         else
-            return Math.max( 1000 + getWorkHoursPerWeek() * 10 - getNumChildUnder18() * 10 , 0) ;
+            return Math.max( 1000 + getHoursAWeekSpentWorking() * 10 - getNumberOfChildrenUnderEighteen() * 10 , 0) ;
     }
 
     @Override
     public int maxEligibilityFromGMACH() {
-        return 1000 + getNumChildUnder18() * 1000;
+        return 1000 + getNumberOfChildrenUnderEighteen() * 1000;
     }
 
     @Override
     public int recommendHoursVolunteer() {
-        return Math.max( 10 - getNumChildUnder18() , 2);
+        return Math.max( 10 - getNumberOfChildrenUnderEighteen() , 2);
     }
-
 
 }
