@@ -42,19 +42,30 @@ public class Community {
         String mu = "\nMUSICAL \n";
         String temp;
         for (CommunityMember member : getCommunityMembers()) {
-            temp = "";
+            temp = "ID: ";
             temp += member.getId();
-            temp += "   ";
+            temp += "   name: ";
             temp += member.getName();
-            temp += "   ";
+            temp += "   recommend hours volunteer: ";
             temp += member.recommendHoursVolunteer();
+            temp += "\n";
 
             switch (member.getContributionType()) {
-                case     MUSICAL: mu += temp;
-                case  PHYSICALLY: ph += temp;
-                case SPIRITUALLY: sp += temp;
+                case     MUSICAL: mu += temp; break;
+                case  PHYSICALLY: ph += temp; break;
+                case SPIRITUALLY: sp += temp; break;
             }
         }
-        return sp + ph + mu + "\n\n";
+        return sp + "\n" + ph + "\n" + mu + "\n\n";
+    }
+
+    @Override
+    public String toString() {
+        String temp = new   String ();
+
+        for (CommunityMember member : this.getCommunityMembers()) {
+            temp += getCommunityMembers().toString();
+        }
+        return temp;
     }
 }
