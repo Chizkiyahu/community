@@ -62,9 +62,10 @@ public class Community {
     @Override
     public String toString() {
         String temp = new   String ();
-
+        int test = 0;
         for (CommunityMember member : this.getCommunityMembers()) {
-            temp += getCommunityMembers().toString();
+            temp += member.toString();
+            test++;
         }
         return temp;
     }
