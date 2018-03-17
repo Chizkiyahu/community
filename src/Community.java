@@ -68,5 +68,6 @@ public class Community {
             test++;
         }
         return temp;
+
     }
 }
