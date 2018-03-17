@@ -1,3 +1,5 @@
+import java.lang.reflect.Field;
+
 public class Single extends CommunityMember {
 
     protected int yearsInSchool;
@@ -32,5 +34,12 @@ public class Single extends CommunityMember {
     @Override
     public int recommendHoursVolunteer() {
         return 10;
+    }
+
+    @Override
+    public String toString() {
+        String temp = new String();
+        temp += "yearsInSchool: " + getYearsInSchool();
+        return super.toString() + temp;
     }
 }

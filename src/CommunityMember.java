@@ -1,3 +1,5 @@
+import java.lang.reflect.Field;
+
 public abstract class CommunityMember implements DutiesAndRights{
 
     protected final int HOURS_IN_A_WEEK = 24 *7;
@@ -84,6 +86,10 @@ public abstract class CommunityMember implements DutiesAndRights{
         return hoursAWeekSpentWorking;
     }
 
+    public float getExploitationOfRights() {
+        return exploitationOfRights;
+    }
+
     public void setHourAWeekSpentLearning(int hourAWeekSpentLearning) throws Exception {
         setWorkPlusTorahHoursPerWeek(hoursAWeekSpentWorking, hourAWeekSpentLearning);
     }
@@ -118,5 +124,18 @@ public abstract class CommunityMember implements DutiesAndRights{
 
     public void setContributionType(ContributionType contributionType) {
         this.contributionType = contributionType;
+    }
+
+    @Override
+    public String toString() {
+        String temp = new String();
+        temp += "\nid: " + getId() + "\tname: " + getName();
+        temp += "\tgender: " + getGender().toString() + "\taddress: " + getAddress();
+        temp += "\thourAWeekSpentLearning: " + getHourAWeekSpentLearning();
+        temp += "\thoursAWeekSpentWorking: " + getHoursAWeekSpentWorking();
+        temp += "\texploitationOfRights: " + getExploitationOfRights();
+        temp += "\tsalary: " + getSalary() + "\tbirthday: " + getBirthday();
+        temp += "\tcontributionType: " + getContributionType().toString();
+        return temp;
     }
 }

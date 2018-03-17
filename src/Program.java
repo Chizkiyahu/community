@@ -7,6 +7,10 @@ public class Program {
         int menuChoice;
         Scanner in = new Scanner(System.in);
         Community community = new Community();
+        try {
+            DataForTest.add(community);
+        }catch (Exception ex) { }
+
 
         do {
             System.out.println("Please enter your choice");
@@ -15,6 +19,7 @@ public class Program {
             System.out.println("2 : Tax report");
             System.out.println("3 : Loan application");
             System.out.println("4 : Volunteer hours report");
+            System.out.println("5 : Print all Community members data");
 
             try {
                 menuChoice = in.nextInt();
@@ -40,6 +45,9 @@ public class Program {
                     String list = community.getVolunteerHoursReport();
                     System.out.print("the list is \n");
                     System.out.print(list);
+                    break;
+                case 5:
+                    System.out.println( community.toString());
                     break;
                 default:
                     System.out.println("Error input");

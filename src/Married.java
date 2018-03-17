@@ -1,3 +1,5 @@
+import java.lang.reflect.Field;
+
 public class Married extends CommunityMember {
 
     protected int spouseId;
@@ -45,6 +47,15 @@ public class Married extends CommunityMember {
     @Override
     public int recommendHoursVolunteer() {
         return Math.max( 10 - getNumberOfChildrenUnderEighteen() , 2);
+    }
+
+
+    @Override
+    public String toString() {
+        String temp = new String();
+        temp += "\tspouseId: " + getSpouseId();
+        temp += "\tnumberOfChildrenUnderEighteen: " + getNumberOfChildrenUnderEighteen();
+        return super.toString() + temp;
     }
 
 }
